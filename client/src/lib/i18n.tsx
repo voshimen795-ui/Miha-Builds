@@ -5,6 +5,7 @@ export type Lang = "sr" | "en";
 const translations = {
   nav: {
     home: { sr: "Pocetna", en: "Home" },
+    services: { sr: "Usluge", en: "Services" },
     lab: { sr: "Laboratorija", en: "The Lab" },
     beta: { sr: "Beta Program", en: "Beta Program" },
     applyForBeta: { sr: "Prijavi se", en: "Apply for Beta" },
@@ -127,6 +128,61 @@ const translations = {
   notFound: {
     message: { sr: "Ova stranica ne postoji.", en: "This page doesn't exist yet." },
     goHome: { sr: "Na pocetnu", en: "Go Home" },
+  },
+  services: {
+    badge: { sr: "Nase usluge", en: "Our Services" },
+    title: { sr: "Digitalna resenja", en: "Digital Solutions" },
+    titleAccent: { sr: " po meri", en: " Tailored" },
+    description: { sr: "Od jednostavnih landing stranica do kompleksnih web aplikacija — biramo pravu tehnologiju za vas projekat.", en: "From simple landing pages to complex web applications — we choose the right technology for your project." },
+    startingFrom: { sr: "Od", en: "From" },
+    popular: { sr: "Najpopularniji", en: "Most Popular" },
+    getStarted: { sr: "Zapocni projekat", en: "Get Started" },
+    contactUs: { sr: "Kontaktiraj nas", en: "Contact Us" },
+    includedTitle: { sr: "Ukljuceno u svaki projekat", en: "Included in Every Project" },
+    includedDesc: { sr: "Bez obzira na paket, svaki projekat dolazi sa ovim standardima kvaliteta.", en: "Regardless of the package, every project comes with these quality standards." },
+    ctaTitle: { sr: "Niste sigurni koji paket vam treba?", en: "Not sure which package you need?" },
+    ctaDesc: { sr: "Javite nam se i pomoci cemo vam da izaberete pravo resenje za vas biznis. Konsultacija je besplatna.", en: "Reach out and we'll help you choose the right solution for your business. Consultation is free." },
+    ctaButton: { sr: "Besplatna konsultacija", en: "Free Consultation" },
+    landing: {
+      name: { sr: "Landing stranica", en: "Landing Page" },
+      price: { sr: "€200 — €500", en: "€200 — €500" },
+      desc: { sr: "Savrsena za lansiranje proizvoda, dogadjaja ili licnog brenda.", en: "Perfect for launching a product, event, or personal brand." },
+      features: {
+        sr: ["Jedna stranica sa sekcijama", "Responsivan dizajn", "Kontakt forma", "SEO optimizacija", "Brza isporuka (5-7 dana)"],
+        en: ["Single page with sections", "Responsive design", "Contact form", "SEO optimization", "Fast delivery (5-7 days)"],
+      },
+    },
+    business: {
+      name: { sr: "Poslovni sajt", en: "Business Website" },
+      price: { sr: "€500 — €1,500", en: "€500 — €1,500" },
+      desc: { sr: "Profesionalno prisustvo za firme koje zele da se istaknu.", en: "Professional presence for businesses that want to stand out." },
+      features: {
+        sr: ["Do 10 stranica", "CMS za upravljanje sadrzajem", "Blog sekcija", "Google Analytics integracija", "Optimizovane performanse", "Isporuka za 2-3 nedelje"],
+        en: ["Up to 10 pages", "Content management system", "Blog section", "Google Analytics integration", "Optimized performance", "Delivery in 2-3 weeks"],
+      },
+    },
+    ecommerce: {
+      name: { sr: "E-Trgovina", en: "E-Commerce" },
+      price: { sr: "€1,500 — €3,000", en: "€1,500 — €3,000" },
+      desc: { sr: "Kompletna online prodavnica spremna za prodaju od prvog dana.", en: "Complete online store ready to sell from day one." },
+      features: {
+        sr: ["Katalog proizvoda", "Korpa i checkout", "Integracija placanja", "Admin panel", "Email notifikacije", "Upravljanje zalihama", "Isporuka za 3-5 nedelja"],
+        en: ["Product catalog", "Cart and checkout", "Payment integration", "Admin panel", "Email notifications", "Inventory management", "Delivery in 3-5 weeks"],
+      },
+    },
+    custom: {
+      name: { sr: "Custom Web Aplikacija", en: "Custom Web App" },
+      price: { sr: "€3,000+", en: "€3,000+" },
+      desc: { sr: "Potpuno prilagodjena aplikacija za kompleksne poslovne potrebe.", en: "Fully customized application for complex business needs." },
+      features: {
+        sr: ["Potpuno prilagodjen dizajn", "Full-stack razvoj", "Baza podataka i API", "Korisnicki panel", "Integracije sa trecim servisima", "Skalabilna arhitektura", "Stalna podrska i odrzavanje"],
+        en: ["Fully custom design", "Full-stack development", "Database and API", "User dashboard", "Third-party integrations", "Scalable architecture", "Ongoing support and maintenance"],
+      },
+    },
+    included: {
+      sr: ["Responsivan dizajn za sve uredjaje", "SEO optimizacija", "SSL sertifikat i sigurnost", "Podrska nakon lansiranja (30 dana)", "Optimizovane performanse", "Moderan tech stack"],
+      en: ["Responsive design for all devices", "SEO optimization", "SSL certificate and security", "Post-launch support (30 days)", "Optimized performance", "Modern tech stack"],
+    },
   },
 } as const;
 

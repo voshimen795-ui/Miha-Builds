@@ -9,6 +9,7 @@ import Floating3D from "@/components/floating-3d";
 import StickyCTA from "@/components/sticky-cta";
 import ScrollProgress from "@/components/scroll-progress";
 import Home from "@/pages/home";
+import Services from "@/pages/services";
 import Lab from "@/pages/lab";
 import Beta from "@/pages/beta";
 import Admin from "@/pages/admin";
@@ -18,6 +19,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/services" component={Services} />
       <Route path="/lab" component={Lab} />
       <Route path="/beta" component={Beta} />
       <Route path="/admin" component={Admin} />

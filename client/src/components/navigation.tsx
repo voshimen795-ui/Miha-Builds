@@ -13,6 +13,7 @@ export default function Navigation() {
 
   const navLinks = [
     { href: "/", label: tr(t.nav.home) },
+    { href: "/services", label: tr(t.nav.services) },
     { href: "/lab", label: tr(t.nav.lab) },
     { href: "/beta", label: tr(t.nav.beta) },
   ];

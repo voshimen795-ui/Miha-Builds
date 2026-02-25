@@ -18,7 +18,7 @@ export default function StickyCTA() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (location === "/beta" || location === "/admin" || dismissed) return null;
+  if (location === "/beta" || location === "/admin" || location === "/services" || dismissed) return null;
 
   return (
     <AnimatePresence>
