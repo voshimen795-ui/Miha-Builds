@@ -5,7 +5,7 @@ import {
   users, projects, betaApplications
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, asc } from "drizzle-orm";
+import { eq, asc, desc } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -16,6 +16,7 @@ export interface IStorage {
   createProject(project: InsertProject): Promise<Project>;
   createBetaApplication(app: InsertBetaApplication): Promise<BetaApplication>;
   getBetaApplications(): Promise<BetaApplication[]>;
+  updateBetaApplicationStatus(id: string, status: string): Promise<BetaApplication | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -54,7 +55,15 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getBetaApplications(): Promise<BetaApplication[]> {
-    return db.select().from(betaApplications);
+    return db.select().from(betaApplications).orderBy(desc(betaApplications.createdAt));
+  }
+
+  async updateBetaApplicationStatus(id: string, status: string): Promise<BetaApplication | undefined> {
+    const [updated] = await db.update(betaApplications)
+      .set({ status })
+      .where(eq(betaApplications.id, id))
+      .returning();
+    return updated;
   }
 }
 

@@ -10,6 +10,7 @@ import ScrollProgress from "@/components/scroll-progress";
 import Home from "@/pages/home";
 import Lab from "@/pages/lab";
 import Beta from "@/pages/beta";
+import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/lab" component={Lab} />
       <Route path="/beta" component={Beta} />
+      <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );

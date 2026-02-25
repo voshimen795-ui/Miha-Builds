@@ -40,5 +40,17 @@ export async function registerRoutes(
     res.json(applications);
   });
 
+  app.patch("/api/beta-applications/:id", async (req, res) => {
+    const { status } = req.body;
+    if (!status || !["pending", "approved", "rejected"].includes(status)) {
+      return res.status(400).json({ message: "Invalid status" });
+    }
+    const application = await storage.updateBetaApplicationStatus(req.params.id, status);
+    if (!application) {
+      return res.status(404).json({ message: "Application not found" });
+    }
+    res.json(application);
+  });
+
   return httpServer;
 }
