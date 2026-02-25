@@ -1,0 +1,24 @@
+Role:
+Senior Full-Stack Developer & UX/UI Designer specializing in minimalist, high-end agency portfolios and high-performance web applications.
+​Task:
+Architect and code a 3-page premium "Build in Public" portfolio application for "Miha Builds." The site must function as a high-conversion landing page and a dynamic project showcase.
+​Context:
+​Frontend: Next.js 14 (App Router), TypeScript, Tailwind CSS.
+​Animations: Framer Motion (for "Hard Tech" feel: smooth transitions, parallax, and micro-interactions).
+​Backend/Database: Supabase or Sanity.io (to handle the "Project Link" dynamic rendering).
+​Design System: Minimalist, elegant, dark-mode focused.
+​Color Palette: Deep Navy (#1A202C), Champagne Gold (#D4AF37), and Off-White (#F7FAFC).
+​Input:
+​Page 1 (Home): Hero section with a "Hard Tech" glassmorphism effect. Headline: "Building the 2026 Digital Standard." Sub-headline: "3 Free Beta Spots Available."
+​Page 2 (The Lab/Portfolio): A dynamic grid where project links are transformed into "Interactive Cards." Each card should show a preview of the site via an iframe or a high-quality screenshot API.
+​Page 3 (The Beta Program): A multi-step glassmorphism form for users to apply for the free website tier.
+​Constraints:
+​Aesthetic: "Ultra-Minimalist Elegant." Large typography, massive whitespace, and gold accents only on CTA buttons and borders.
+​Performance: 100/100 Lighthouse score. Use server-side rendering for the project list.
+​The "Link-to-Project" Feature: Create a component that takes a raw URL input and renders it within a "MacBook Mockup" frame or a "Browser Window" CSS component so it looks premium instantly.
+​Code Quality: Clean, modular components. Use Shadcn/ui for base components but customized with the Gold/Navy theme.
+​Output:
+​Full tailwind.config.js with the Miha Builds color palette.
+​The layout.tsx featuring a blurry gradient background and a glassmorphism navigation bar.
+​The ProjectCard component logic that handles the dynamic link rendering.
+​A Step-by-step implementation guide for the "Free Tier" application database.

@@ -6,12 +6,36 @@ export default {
   theme: {
     extend: {
       borderRadius: {
-        lg: ".5625rem", /* 9px */
-        md: ".375rem", /* 6px */
-        sm: ".1875rem", /* 3px */
+        lg: ".5625rem",
+        md: ".375rem",
+        sm: ".1875rem",
       },
       colors: {
-        // Flat / base colors (regular buttons)
+        navy: {
+          50: "#E8EBF0",
+          100: "#C5CBD6",
+          200: "#8E9AB0",
+          300: "#5A6A89",
+          400: "#2D3D5E",
+          500: "#1A202C",
+          600: "#151A24",
+          700: "#10141C",
+          800: "#0B0E14",
+          900: "#06080C",
+        },
+        gold: {
+          50: "#FBF5E0",
+          100: "#F5E6B4",
+          200: "#EDD583",
+          300: "#E5C452",
+          400: "#D4AF37",
+          500: "#C49B2A",
+          600: "#A37F22",
+          700: "#82641A",
+          800: "#614A13",
+          900: "#40310D",
+        },
+        offwhite: "#F7FAFC",
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",
         border: "hsl(var(--border) / <alpha-value>)",
@@ -96,10 +120,25 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "pulse-gold": {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(212, 175, 55, 0.1)" },
+          "50%": { boxShadow: "0 0 40px rgba(212, 175, 55, 0.2)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.6s ease-out forwards",
+        "float": "float 6s ease-in-out infinite",
+        "pulse-gold": "pulse-gold 3s ease-in-out infinite",
       },
     },
   },
