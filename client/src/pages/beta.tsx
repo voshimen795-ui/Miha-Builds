@@ -121,9 +121,16 @@ export default function Beta() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="glass rounded-xl p-12 max-w-lg text-center glow-gold"
+          className="glass rounded-xl p-12 max-w-lg text-center glow-gold relative overflow-visible"
           data-testid="success-message"
         >
+          <motion.img
+            src="/images/3d-helix.png"
+            alt=""
+            className="absolute -top-8 -right-8 w-20 opacity-50 hidden md:block"
+            animate={{ y: [0, -10, 0], rotate: [0, 15, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
           <div className="w-20 h-20 rounded-full bg-gold-400/20 flex items-center justify-center mx-auto mb-6">
             <Check size={40} className="text-gold-400" />
           </div>
@@ -201,8 +208,15 @@ export default function Beta() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="glass rounded-xl p-8 md:p-10"
+          className="glass rounded-xl p-8 md:p-10 relative overflow-visible"
         >
+          <motion.img
+            src="/images/3d-cone.png"
+            alt=""
+            className="absolute -top-6 -left-6 w-16 opacity-40 hidden md:block pointer-events-none"
+            animate={{ y: [0, -8, 0], rotate: [0, -10, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          />
           <AnimatePresence mode="wait">
             {step === 0 && (
               <StepContent key="step0">

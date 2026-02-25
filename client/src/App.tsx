@@ -4,6 +4,9 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/navigation";
+import Floating3D from "@/components/floating-3d";
+import StickyCTA from "@/components/sticky-cta";
+import ScrollProgress from "@/components/scroll-progress";
 import Home from "@/pages/home";
 import Lab from "@/pages/lab";
 import Beta from "@/pages/beta";
@@ -24,9 +27,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen navy-gradient">
+        <div className="min-h-screen navy-gradient relative">
+          <ScrollProgress />
+          <Floating3D />
           <Navigation />
-          <Router />
+          <div className="relative z-10">
+            <Router />
+          </div>
+          <StickyCTA />
         </div>
         <Toaster />
       </TooltipProvider>

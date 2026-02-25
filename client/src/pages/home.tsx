@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Link } from "wouter";
-import { ArrowRight, Sparkles, Code2, Zap, Shield } from "lucide-react";
+import { ArrowRight, Sparkles, Code2, Zap, Shield, Star, Users, Globe2 } from "lucide-react";
 import logoImg from "@assets/IMG_20260225_201123_554_1772047207845.webp";
 
 const features = [
@@ -21,10 +22,31 @@ const features = [
   },
 ];
 
+const stats = [
+  { value: "100%", label: "Client Satisfaction", icon: Star },
+  { value: "50+", label: "Projects Delivered", icon: Globe2 },
+  { value: "24/7", label: "Dedicated Support", icon: Users },
+];
+
+const process_steps = [
+  { num: "01", title: "Discovery", desc: "We dive deep into your brand, audience, and goals to craft the perfect strategy." },
+  { num: "02", title: "Design", desc: "Pixel-perfect mockups with attention to every detail, animation, and micro-interaction." },
+  { num: "03", title: "Develop", desc: "Clean, performant code built with cutting-edge technologies and best practices." },
+  { num: "04", title: "Deploy", desc: "Launch with confidence. Optimized hosting, analytics, and ongoing support." },
+];
+
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.95]);
+
   return (
     <div className="min-h-screen">
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-400/5 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gold-400/3 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
@@ -33,7 +55,10 @@ export default function Home() {
 
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_hsl(220_26%_14%)_70%)]" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <motion.div
+          style={{ opacity: heroOpacity, scale: heroScale }}
+          className="relative z-10 max-w-5xl mx-auto px-6 text-center"
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -57,7 +82,7 @@ export default function Home() {
             <motion.img
               src={logoImg}
               alt="Miha Builds"
-              className="w-24 h-24 mx-auto mb-10 rounded-xl"
+              className="w-24 h-24 mx-auto mb-10 rounded-xl glow-gold-sm"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -127,13 +152,13 @@ export default function Home() {
               </motion.div>
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
@@ -145,7 +170,33 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="py-32 px-6">
+      <section className="py-20 px-6 relative z-10">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-3 gap-6 md:gap-12">
+            {stats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="text-center"
+                data-testid={`stat-${i}`}
+              >
+                <stat.icon size={20} className="text-gold-400 mx-auto mb-3" />
+                <p className="text-3xl md:text-4xl font-serif font-bold text-gold-gradient mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-xs md:text-sm text-muted-foreground tracking-wide">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-32 px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -188,14 +239,75 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-32 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-32 px-6 relative z-10">
+        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
+            <span className="text-xs font-medium text-gold-400 tracking-[0.3em] uppercase mb-4 block">
+              Our Process
+            </span>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-offwhite">
+              How We <span className="text-gold-gradient">Build</span>
+            </h2>
+          </motion.div>
+
+          <div className="space-y-0">
+            {process_steps.map((step, i) => (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="flex gap-6 md:gap-10 py-8 border-b border-gold-400/10 last:border-b-0 group"
+                data-testid={`process-step-${i}`}
+              >
+                <span className="text-4xl md:text-5xl font-serif font-bold text-gold-400/20 group-hover:text-gold-400/40 transition-colors flex-shrink-0">
+                  {step.num}
+                </span>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-serif font-semibold text-offwhite mb-2 group-hover:text-gold-400 transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-32 px-6 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="glass rounded-2xl p-12 md:p-16 text-center glow-gold relative overflow-visible"
+          >
+            <motion.img
+              src="/images/3d-sphere.png"
+              alt=""
+              className="absolute -top-10 -right-10 w-28 opacity-50 hidden md:block"
+              animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.img
+              src="/images/3d-torus.png"
+              alt=""
+              className="absolute -bottom-8 -left-8 w-24 opacity-40 hidden md:block"
+              animate={{ y: [0, 8, 0], rotate: [0, -8, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            />
+
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-offwhite mb-6">
               Ready to Build Something
               <span className="text-gold-gradient"> Extraordinary</span>?
@@ -205,7 +317,7 @@ export default function Home() {
             </p>
             <Link href="/beta">
               <motion.div
-                className="inline-flex items-center gap-3 px-10 py-4 rounded-md bg-gold-400 text-navy-500 font-semibold text-lg cursor-pointer glow-gold"
+                className="inline-flex items-center gap-3 px-10 py-4 rounded-md bg-gold-400 text-navy-500 font-semibold text-lg cursor-pointer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 data-testid="button-apply-cta"
@@ -218,7 +330,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-gold-400/10 py-12 px-6">
+      <footer className="border-t border-gold-400/10 py-12 px-6 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img src={logoImg} alt="Miha Builds" className="h-8 w-8 rounded-md object-cover" />
