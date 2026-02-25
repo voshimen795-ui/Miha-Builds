@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [location] = useLocation();
+  const { tr, t } = useI18n();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,7 +18,7 @@ export default function StickyCTA() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (location === "/beta" || dismissed) return null;
+  if (location === "/beta" || location === "/admin" || dismissed) return null;
 
   return (
     <AnimatePresence>
@@ -32,10 +34,10 @@ export default function StickyCTA() {
           <div className="glass-strong rounded-xl px-6 py-3 flex items-center gap-4 glow-gold-sm">
             <div className="hidden sm:block">
               <p className="text-sm font-medium text-offwhite">
-                3 Free Beta Spots Left
+                {tr(t.sticky.spotsLeft)}
               </p>
               <p className="text-xs text-muted-foreground">
-                Limited availability
+                {tr(t.sticky.limited)}
               </p>
             </div>
             <Link href="/beta">
@@ -45,7 +47,7 @@ export default function StickyCTA() {
                 whileTap={{ scale: 0.98 }}
                 data-testid="button-sticky-apply"
               >
-                Apply Now
+                {tr(t.sticky.applyNow)}
                 <ArrowRight size={14} />
               </motion.div>
             </Link>

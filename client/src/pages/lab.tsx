@@ -1,9 +1,25 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Beaker, Loader2, Filter } from "lucide-react";
 import ProjectCard from "@/components/project-card";
+import { useI18n } from "@/lib/i18n";
 import type { Project } from "@shared/schema";
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
+};
 
 export default function Lab() {
   const { data: projects, isLoading } = useQuery<Project[]>({
@@ -11,6 +27,8 @@ export default function Lab() {
   });
 
   const [activeFilter, setActiveFilter] = useState("All");
+  const { tr, t, lang } = useI18n();
+
   const categories = ["All", ...new Set(projects?.map((p) => p.category) || [])];
   const filtered = activeFilter === "All" ? projects : projects?.filter((p) => p.category === activeFilter);
 
@@ -18,24 +36,33 @@ export default function Lab() {
     <div className="min-h-screen pt-28 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass glow-gold-sm mb-8">
-            <Beaker size={14} className="text-gold-400" />
-            <span className="text-xs font-medium text-gold-300 tracking-[0.3em] uppercase">
-              The Lab
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-offwhite mb-6" data-testid="text-lab-title">
-            Our <span className="text-gold-gradient">Portfolio</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto" data-testid="text-lab-description">
-            Every project is a testament to our commitment to excellence.
-            Explore our latest builds rendered in real-time.
-          </p>
+          <motion.div variants={fadeUp}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass glow-gold-sm mb-8">
+              <Beaker size={14} className="text-gold-400" />
+              <span className="text-xs font-medium text-gold-300 tracking-[0.3em] uppercase">
+                {tr(t.lab.badge)}
+              </span>
+            </div>
+          </motion.div>
+          <motion.h1
+            variants={fadeUp}
+            className="text-4xl md:text-6xl font-serif font-bold text-offwhite mb-6"
+            data-testid="text-lab-title"
+          >
+            {tr(t.lab.title)} <span className="text-gold-gradient">{tr(t.lab.titleAccent)}</span>
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            data-testid="text-lab-description"
+          >
+            {tr(t.lab.description)}
+          </motion.p>
         </motion.div>
 
         {!isLoading && projects && projects.length > 0 && (
@@ -49,7 +76,7 @@ export default function Lab() {
               <Filter size={14} className="text-gold-400 flex-shrink-0" />
               <div className="flex items-center gap-1 flex-wrap">
                 {categories.map((cat) => (
-                  <button
+                  <motion.button
                     key={cat}
                     onClick={() => setActiveFilter(cat)}
                     className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
@@ -57,10 +84,12 @@ export default function Lab() {
                         ? "bg-gold-400/20 text-gold-400 border border-gold-400/30"
                         : "text-muted-foreground hover:text-offwhite"
                     }`}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     data-testid={`button-filter-${cat.toLowerCase()}`}
                   >
-                    {cat}
-                  </button>
+                    {cat === "All" ? tr(t.lab.all) : cat}
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -69,10 +98,14 @@ export default function Lab() {
 
         {isLoading ? (
           <div className="flex items-center justify-center py-20" data-testid="loading-projects">
-            <div className="flex flex-col items-center gap-4">
+            <motion.div
+              className="flex flex-col items-center gap-4"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
               <Loader2 size={32} className="text-gold-400 animate-spin" />
-              <p className="text-muted-foreground text-sm">Loading projects...</p>
-            </div>
+              <p className="text-muted-foreground text-sm">{tr(t.lab.loading)}</p>
+            </motion.div>
           </div>
         ) : filtered && filtered.length > 0 ? (
           <motion.div
@@ -80,9 +113,20 @@ export default function Lab() {
             className="grid md:grid-cols-2 gap-8"
             data-testid="grid-projects"
           >
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} />
-            ))}
+            <AnimatePresence mode="popLayout">
+              {filtered.map((project, i) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                >
+                  <ProjectCard project={project} index={i} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </motion.div>
         ) : (
           <motion.div
@@ -95,7 +139,7 @@ export default function Lab() {
               <Beaker size={32} className="text-gold-400" />
             </div>
             <h3 className="text-xl font-serif font-semibold text-offwhite mb-3">
-              {activeFilter !== "All" ? `No ${activeFilter} projects yet` : "Projects Coming Soon"}
+              {activeFilter !== "All" ? `${tr(t.lab.noCategory)}` : tr(t.lab.comingSoon)}
             </h3>
             <p className="text-muted-foreground">
               {activeFilter !== "All" ? (
@@ -104,10 +148,10 @@ export default function Lab() {
                   className="text-gold-400 underline underline-offset-4"
                   data-testid="button-clear-filter"
                 >
-                  View all projects
+                  {tr(t.lab.viewAll)}
                 </button>
               ) : (
-                "We're cooking up something special. Check back soon."
+                tr(t.lab.comingSoonDesc)
               )}
             </p>
           </motion.div>
@@ -121,7 +165,11 @@ export default function Lab() {
             transition={{ duration: 0.6 }}
             className="mt-20 text-center"
           >
-            <div className="glass rounded-xl p-10 inline-block relative overflow-visible">
+            <motion.div
+              className="glass rounded-xl p-10 inline-block relative overflow-visible"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               <motion.img
                 src="/images/3d-cube.png"
                 alt=""
@@ -130,19 +178,19 @@ export default function Lab() {
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               />
               <p className="text-xl font-serif text-offwhite mb-2">
-                Want your project here?
+                {tr(t.lab.wantProject)}
               </p>
               <p className="text-sm text-muted-foreground mb-6">
-                We have 3 free beta spots remaining.
+                {tr(t.lab.spotsRemaining)}
               </p>
               <a
                 href="/beta"
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-gold-400 text-navy-500 font-semibold text-sm"
                 data-testid="button-lab-apply"
               >
-                Apply Now
+                {tr(t.lab.applyNow)}
               </a>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </div>

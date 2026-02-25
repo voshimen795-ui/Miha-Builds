@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export default function NotFound() {
+  const { tr, t } = useI18n();
+
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
       <motion.div
@@ -15,7 +18,7 @@ export default function NotFound() {
           404
         </h1>
         <p className="text-xl text-muted-foreground mb-8">
-          This page doesn't exist yet.
+          {tr(t.notFound.message)}
         </p>
         <Link href="/">
           <motion.div
@@ -25,7 +28,7 @@ export default function NotFound() {
             data-testid="button-go-home"
           >
             <ArrowLeft size={18} />
-            Go Home
+            {tr(t.notFound.goHome)}
           </motion.div>
         </Link>
       </motion.div>

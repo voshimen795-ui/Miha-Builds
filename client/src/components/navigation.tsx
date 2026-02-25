@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import logoImg from "@assets/IMG_20260225_201123_554_1772047207845.webp";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/lab", label: "The Lab" },
-  { href: "/beta", label: "Beta Program" },
-];
 
 export default function Navigation() {
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { lang, setLang, tr, t } = useI18n();
+
+  const navLinks = [
+    { href: "/", label: tr(t.nav.home) },
+    { href: "/lab", label: tr(t.nav.lab) },
+    { href: "/beta", label: tr(t.nav.beta) },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -24,6 +26,8 @@ export default function Navigation() {
   useEffect(() => {
     setMobileOpen(false);
   }, [location]);
+
+  const toggleLang = () => setLang(lang === "sr" ? "en" : "sr");
 
   return (
     <>
@@ -83,7 +87,28 @@ export default function Navigation() {
               ))}
             </div>
 
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-3">
+              <motion.button
+                onClick={toggleLang}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-offwhite/70 hover:text-offwhite border border-gold-400/10 hover:border-gold-400/30 transition-all"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                data-testid="button-lang-toggle"
+              >
+                <Globe size={14} className="text-gold-400" />
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={lang}
+                    initial={{ y: -8, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 8, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    {lang === "sr" ? "EN" : "SR"}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.button>
+
               <Link href="/beta">
                 <motion.div
                   className="px-6 py-2.5 rounded-md text-sm font-semibold bg-gold-400 text-navy-500 cursor-pointer"
@@ -91,18 +116,29 @@ export default function Navigation() {
                   whileTap={{ scale: 0.98 }}
                   data-testid="button-apply-nav"
                 >
-                  Apply for Beta
+                  {tr(t.nav.applyForBeta)}
                 </motion.div>
               </Link>
             </div>
 
-            <button
-              className="md:hidden text-offwhite p-2"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              data-testid="button-mobile-menu"
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <div className="flex items-center gap-2 md:hidden">
+              <motion.button
+                onClick={toggleLang}
+                className="flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium text-offwhite/70 border border-gold-400/10"
+                whileTap={{ scale: 0.95 }}
+                data-testid="button-lang-toggle-mobile"
+              >
+                <Globe size={12} className="text-gold-400" />
+                {lang === "sr" ? "EN" : "SR"}
+              </motion.button>
+              <button
+                className="text-offwhite p-2"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                data-testid="button-mobile-menu"
+              >
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -148,7 +184,7 @@ export default function Navigation() {
                     className="px-8 py-3 rounded-md text-lg font-semibold bg-gold-400 text-navy-500 cursor-pointer inline-block"
                     data-testid="button-apply-mobile"
                   >
-                    Apply for Beta
+                    {tr(t.nav.applyForBeta)}
                   </span>
                 </Link>
               </motion.div>

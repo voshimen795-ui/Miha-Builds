@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Globe, Monitor } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 import type { Project } from "@shared/schema";
 
 interface ProjectCardProps {
@@ -18,17 +19,16 @@ const gradients = [
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const [iframeError, setIframeError] = useState(false);
   const gradient = gradients[index % gradients.length];
+  const { tr, t } = useI18n();
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
       className="group"
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       data-testid={`card-project-${project.id}`}
     >
-      <div className="glass-card rounded-lg transition-all duration-500 group-hover:glow-gold-sm">
+      <div className="glass-card rounded-lg transition-all duration-500 group-hover:glow-gold-sm overflow-hidden">
         <div className="bg-navy-600/80 rounded-t-lg px-4 py-3 flex items-center gap-2">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500/60" />
@@ -84,10 +84,14 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-navy-500/60 backdrop-blur-sm cursor-pointer z-10"
             data-testid={`link-project-visit-${project.id}`}
           >
-            <div className="px-6 py-2.5 rounded-md bg-gold-400 text-navy-500 font-semibold text-sm flex items-center gap-2">
+            <motion.div
+              className="px-6 py-2.5 rounded-md bg-gold-400 text-navy-500 font-semibold text-sm flex items-center gap-2"
+              initial={{ y: 10, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+            >
               <ExternalLink size={16} />
-              Visit Site
-            </div>
+              {tr(t.lab.visitSite)}
+            </motion.div>
           </a>
         </div>
 
