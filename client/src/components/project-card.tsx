@@ -20,6 +20,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   const [iframeError, setIframeError] = useState(false);
   const gradient = gradients[index % gradients.length];
   const { tr, t } = useI18n();
+  const hasImage = !!project.imageUrl;
 
   return (
     <motion.div
@@ -55,7 +56,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <div className="relative aspect-[16/10] bg-navy-700/40 overflow-hidden">
-          {!iframeError ? (
+          {hasImage ? (
+            <motion.img
+              src={project.imageUrl!}
+              alt={project.title}
+              className="w-full h-full object-cover object-top"
+              initial={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            />
+          ) : !iframeError ? (
             <iframe
               src={project.url}
               title={project.title}
@@ -66,16 +76,18 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             />
           ) : null}
 
-          <div className={`absolute inset-0 bg-gradient-to-br ${gradient} flex items-center justify-center ${iframeError ? '' : 'opacity-0 group-hover:opacity-100'} transition-all duration-500`}>
-            {iframeError && (
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-16 h-16 rounded-xl bg-gold-400/10 flex items-center justify-center">
-                  <Monitor size={28} className="text-gold-400" />
+          {!hasImage && (
+            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} flex items-center justify-center ${iframeError ? '' : 'opacity-0 group-hover:opacity-100'} transition-all duration-500`}>
+              {iframeError && (
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 rounded-xl bg-gold-400/10 flex items-center justify-center">
+                    <Monitor size={28} className="text-gold-400" />
+                  </div>
+                  <span className="text-sm text-muted-foreground font-medium">{project.title}</span>
                 </div>
-                <span className="text-sm text-muted-foreground font-medium">{project.title}</span>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
           <a
             href={project.url}

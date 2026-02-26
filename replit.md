@@ -24,7 +24,7 @@ Premium "Build in Public" portfolio application for "Miha Builds" - a multi-page
 
 ## Key Components
 - `Navigation` - Glassmorphism nav bar with scroll detection + mobile menu + language toggle (Globe icon)
-- `ProjectCard` - Browser window mockup that renders project URLs with iframe (+ fallback)
+- `ProjectCard` - Browser window mockup with image preview or live iframe rendering
 - `Floating3D` - Floating 3D metallic shapes with parallax scroll effects
 - `StickyCTA` - Floating bottom CTA bar (hidden on /beta, /admin, /services)
 - `ScrollProgress` - Gold progress bar at top of page
@@ -38,7 +38,7 @@ Premium "Build in Public" portfolio application for "Miha Builds" - a multi-page
 - `PATCH /api/beta-applications/:id` - Update application status
 
 ## Database Tables
-- `projects` - Portfolio project entries (dionaservis.com is first)
+- `projects` - Portfolio project entries with optional imageUrl (dionaservis.com uses iframe, others use generated preview images)
 - `beta_applications` - Beta program submissions with status tracking
 - `users` - Base user table
 

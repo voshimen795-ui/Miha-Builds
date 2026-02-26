@@ -18,6 +18,7 @@ export const projects = pgTable("projects", {
   status: text("status").notNull().default("live"),
   featured: boolean("featured").default(false),
   sortOrder: integer("sort_order").default(0),
+  imageUrl: text("image_url"),
 });
 
 export const betaApplications = pgTable("beta_applications", {
