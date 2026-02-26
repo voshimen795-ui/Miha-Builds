@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Globe, Monitor } from "lucide-react";
+import { ExternalLink, Globe, Monitor, Eye } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import type { Project } from "@shared/schema";
 
@@ -21,6 +21,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   const gradient = gradients[index % gradients.length];
   const { tr, t } = useI18n();
   const hasImage = !!project.imageUrl;
+  const isLive = !hasImage;
 
   return (
     <motion.div
@@ -44,15 +45,17 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               </span>
             </div>
           </div>
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-gold-400"
-            data-testid={`link-project-external-${project.id}`}
-          >
-            <ExternalLink size={14} />
-          </a>
+          {isLive && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground transition-colors hover:text-gold-400"
+              data-testid={`link-project-external-${project.id}`}
+            >
+              <ExternalLink size={14} />
+            </a>
+          )}
         </div>
 
         <div className="relative aspect-[16/10] bg-navy-700/40 overflow-hidden">
@@ -89,22 +92,38 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
           )}
 
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-navy-500/60 backdrop-blur-sm cursor-pointer z-10"
-            data-testid={`link-project-visit-${project.id}`}
-          >
-            <motion.div
-              className="px-6 py-2.5 rounded-md bg-gold-400 text-navy-500 font-semibold text-sm flex items-center gap-2"
-              initial={{ y: 10, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
+          {isLive ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-navy-500/60 backdrop-blur-sm cursor-pointer z-10"
+              data-testid={`link-project-visit-${project.id}`}
             >
-              <ExternalLink size={16} />
-              {tr(t.lab.visitSite)}
-            </motion.div>
-          </a>
+              <motion.div
+                className="px-6 py-2.5 rounded-md bg-gold-400 text-navy-500 font-semibold text-sm flex items-center gap-2"
+                initial={{ y: 10, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+              >
+                <ExternalLink size={16} />
+                {tr(t.lab.visitSite)}
+              </motion.div>
+            </a>
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-navy-500/60 backdrop-blur-sm z-10"
+              data-testid={`link-project-visit-${project.id}`}
+            >
+              <motion.div
+                className="px-6 py-2.5 rounded-md bg-gold-400/90 text-navy-500 font-semibold text-sm flex items-center gap-2"
+                initial={{ y: 10, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+              >
+                <Eye size={16} />
+                {project.title}
+              </motion.div>
+            </div>
+          )}
         </div>
 
         <div className="p-5">
