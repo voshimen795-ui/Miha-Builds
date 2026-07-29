@@ -7,6 +7,7 @@ const translations = {
     home: { sr: "Početna", en: "Home" },
     projects: { sr: "Projekti", en: "Projects" },
     services: { sr: "Usluge", en: "Services" },
+    cv: { sr: "Biografija", en: "Résumé" },
     skills: { sr: "Veštine", en: "Skills" },
     contact: { sr: "Kontakt", en: "Contact" },
     getInTouch: { sr: "Kontaktiraj me", en: "Get in Touch" },
@@ -58,6 +59,61 @@ const translations = {
   footer: {
     tagline: { sr: "Gradimo budućnost, piksel po piksel.", en: "Building the future, one pixel at a time." },
     rights: { sr: "Sva prava zadržana.", en: "All rights reserved." },
+  },
+  cv: {
+    badge: { sr: "Biografija", en: "Résumé" },
+    title: { sr: "O", en: "About" },
+    titleAccent: { sr: " meni", en: " Me" },
+    name: { sr: "Mihailo Kojić", en: "Mihailo Kojić" },
+    role: {
+      sr: "Web Developer & AI-Assisted Builder",
+      en: "Web Developer & AI-Assisted Builder",
+    },
+    tagline: { sr: "Kreativan vibe coder", en: "Creative vibe coder" },
+    locationLabel: { sr: "Lokacija", en: "Location" },
+    location: { sr: "Beograd, Srbija", en: "Belgrade, Serbia" },
+    availabilityLabel: { sr: "Dostupnost", en: "Availability" },
+    availability: { sr: "Remote / Hibridno / On-site", en: "Remote / Hybrid / On-site" },
+    languagesLabel: { sr: "Jezici", en: "Languages" },
+    languages: {
+      sr: "Srpski (maternji), Engleski (profesionalni nivo)",
+      en: "Serbian (native), English (professional level)",
+    },
+    focusLabel: { sr: "Fokus", en: "Focus" },
+    focus: {
+      sr: "Izrada web aplikacija · AI-potpomognut razvoj · Multimedija",
+      en: "Web app development · AI-assisted development · Multimedia",
+    },
+    profileTitle: { sr: "Profil", en: "Profile" },
+    profile: {
+      sr: "Kreativan i samostalan web developer sa solidnim znanjem HTML, CSS, JavaScript i Python, i naprednim korišćenjem AI alata za brz i kvalitetan razvoj web aplikacija. Kombinujem tehničko razmišljanje sa vizuelnom kreativnošću i jasnom komunikacijom.",
+      en: "A creative and self-driven web developer with solid knowledge of HTML, CSS, JavaScript, and Python, plus advanced use of AI tools for fast, high-quality web app development. I combine technical thinking with visual creativity and clear communication.",
+    },
+    highlightTitle: { sr: "Istaknut projekat", en: "Featured Project" },
+    highlightName: { sr: "FeelBG.com", en: "FeelBG.com" },
+    highlight: {
+      sr: "Platforma za otkrivanje beogradskih lokala namenjena turistima — osmišljena, dizajnirana i razvijena samostalno, od UI/UX dizajna i koda do modela prihoda. Uključuje interaktivnu 3D mapu Beograda (Three.js), HD foto-karusel i video hero sekciju.",
+      en: "A platform for discovering Belgrade's cafés, restaurants, and clubs, built for tourists — conceived, designed, and developed solo, from UI/UX and code to the revenue model. Features an interactive 3D map of Belgrade (Three.js), an HD photo carousel, and a video hero section.",
+    },
+    educationTitle: { sr: "Obrazovanje", en: "Education" },
+    edu1: {
+      sr: "University of Applied Sciences Upper Austria — Artificial Intelligence Solutions",
+      en: "University of Applied Sciences Upper Austria — Artificial Intelligence Solutions",
+    },
+    edu1Detail: {
+      sr: "Godinu i 6 meseci u međunarodnom okruženju na engleskom jeziku",
+      en: "1 year and 6 months in an international, English-language environment",
+    },
+    edu2: {
+      sr: "Elektrotehnička škola „Nikola Tesla“, Beograd — smer Multimedija",
+      en: "Nikola Tesla School of Electrical Engineering, Belgrade — Multimedia",
+    },
+    edu2Detail: {
+      sr: "Među boljim učenicima generacije · učesnik Photoshop takmičenja",
+      en: "Among the top students of the year · Photoshop competition participant",
+    },
+    download: { sr: "Preuzmi CV (PDF)", en: "Download CV (PDF)" },
+    viewOnline: { sr: "Pogledaj u pregledaču", en: "View in browser" },
   },
   skills: {
     badge: { sr: "Tehnologije", en: "Tech Stack" },
@@ -176,7 +232,7 @@ const translations = {
     ctaButton: { sr: "Besplatna konsultacija", en: "Free Consultation" },
     landing: {
       name: { sr: "Landing stranica", en: "Landing Page" },
-      price: { sr: "€200 — €500", en: "€200 — €500" },
+      price: { sr: "€140 — €350", en: "€140 — €350" },
       desc: { sr: "Savršena za lansiranje proizvoda, događaja ili ličnog brenda.", en: "Perfect for launching a product, event, or personal brand." },
       features: {
         sr: ["Jedna stranica sa sekcijama", "Responsivan dizajn", "Kontakt forma", "SEO optimizacija", "Brza isporuka (5-7 dana)"],
@@ -185,7 +241,7 @@ const translations = {
     },
     business: {
       name: { sr: "Poslovni sajt", en: "Business Website" },
-      price: { sr: "€500 — €1,500", en: "€500 — €1,500" },
+      price: { sr: "€350 — €1,050", en: "€350 — €1,050" },
       desc: { sr: "Profesionalno prisustvo za firme koje žele da se istaknu.", en: "Professional presence for businesses that want to stand out." },
       features: {
         sr: ["Do 10 stranica", "CMS za upravljanje sadržajem", "Blog sekcija", "Google Analytics integracija", "Optimizovane performanse", "Isporuka za 2-3 nedelje"],
@@ -194,7 +250,7 @@ const translations = {
     },
     ecommerce: {
       name: { sr: "E-Trgovina", en: "E-Commerce" },
-      price: { sr: "€1,500 — €3,000", en: "€1,500 — €3,000" },
+      price: { sr: "€1,050 — €2,100", en: "€1,050 — €2,100" },
       desc: { sr: "Kompletna online prodavnica spremna za prodaju od prvog dana.", en: "Complete online store ready to sell from day one." },
       features: {
         sr: ["Katalog proizvoda", "Korpa i checkout", "Integracija plaćanja", "Admin panel", "Email notifikacije", "Upravljanje zalihama", "Isporuka za 3-5 nedelja"],
@@ -203,7 +259,7 @@ const translations = {
     },
     custom: {
       name: { sr: "Custom Web Aplikacija", en: "Custom Web App" },
-      price: { sr: "€3,000+", en: "€3,000+" },
+      price: { sr: "€2,100+", en: "€2,100+" },
       desc: { sr: "Potpuno prilagođena aplikacija za kompleksne poslovne potrebe.", en: "Fully customized application for complex business needs." },
       features: {
         sr: ["Potpuno prilagođen dizajn", "Full-stack razvoj", "Baza podataka i API", "Korisnički panel", "Integracije sa trećim servisima", "Skalabilna arhitektura", "Stalna podrška i održavanje"],
