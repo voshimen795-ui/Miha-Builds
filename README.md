@@ -49,9 +49,20 @@ email address as a fallback.
 ## Editing Your Projects
 
 Projects live in **`client/src/data/projects.ts`** — a simple array you edit
-directly. Each project takes a `title`, `description`, `url`, `category`, and an
-optional `imageUrl` (drop preview images in `client/public/images/`). Leave
-`imageUrl` off to render the live site in an iframe instead.
+directly. Each entry takes a `title`, `url`, plus bilingual `category`,
+`tagline`, `description`, and `highlights`, and a `tech` list.
+
+**Preview images.** For the card preview you have three options, best first:
+
+1. **`imageUrl`** — a screenshot in `client/public/images/`. Always works;
+   recommended.
+2. **`livePreview: true`** — embeds the real site in an iframe. Only use this if
+   the site allows framing: many hosts send `X-Frame-Options` or a CSP
+   `frame-ancestors` header, which makes the embed render blank. Browsers give
+   JavaScript no way to detect that (`onLoad` fires even for error pages), so it
+   can't be auto-detected — verify manually before enabling.
+3. **Neither** — shows a clean branded panel with the project name, tagline, and
+   a "Visit Site" call to action.
 
 ## Structure
 
