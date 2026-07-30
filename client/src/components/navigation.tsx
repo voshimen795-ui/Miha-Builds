@@ -4,7 +4,7 @@ import { Menu, X, Globe } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import logoImg from "@assets/IMG_20260225_201123_554_1772047207845.webp";
 
-const SECTION_IDS = ["projects", "services", "skills", "contact"];
+const SECTION_IDS = ["projects", "services", "cv", "skills", "contact"];
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,6 +15,7 @@ export default function Navigation() {
   const navLinks = [
     { href: "#projects", label: tr(t.nav.projects), id: "projects" },
     { href: "#services", label: tr(t.nav.services), id: "services" },
+    { href: "#cv", label: tr(t.nav.cv), id: "cv" },
     { href: "#skills", label: tr(t.nav.skills), id: "skills" },
     { href: "#contact", label: tr(t.nav.contact), id: "contact" },
   ];

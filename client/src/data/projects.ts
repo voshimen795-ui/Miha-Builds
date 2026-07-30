@@ -1,59 +1,67 @@
 // Portfolio projects. Edit this file to add, remove, or reorder your work —
 // it drives the Projects section directly (no backend, no database).
 //
-// - imageUrl: path to a preview image in client/public/images (recommended).
-//   Leave it undefined to render the live site in an iframe instead.
-// - url: the live site URL (used for the "Visit Site" link and the iframe).
+// Preview options, in order of preference:
+//   1. imageUrl  — a screenshot in client/public/images (RECOMMENDED, always works)
+//   2. livePreview: true — embeds the real site in an iframe. Only use this if the
+//      site allows framing: many hosts send X-Frame-Options/CSP frame-ancestors,
+//      which makes the embed render blank. Browsers give JS no way to detect that
+//      (onLoad fires even for error pages), so this cannot be auto-detected.
+//   3. neither — shows a clean branded panel with a "Visit Site" call to action.
+//
+// Copy is bilingual so it follows the site's SR/EN language toggle.
 
 export interface Project {
   title: string;
-  description: string;
   url: string;
-  category: string;
+  category: { sr: string; en: string };
+  tagline: { sr: string; en: string };
+  description: { sr: string; en: string };
+  highlights: { sr: string[]; en: string[] };
+  tech: string[];
+  status?: { sr: string; en: string };
   imageUrl?: string;
-  featured?: boolean;
+  livePreview?: boolean;
 }
 
 export const projects: Project[] = [
   {
-    title: "Diona Servis",
-    description:
-      "Live business website with a clean, conversion-focused layout — rendered here in real time.",
-    url: "https://dionaservis.com",
-    category: "Business",
-    featured: true,
-    // no imageUrl → renders the live site in an iframe
-  },
-  {
-    title: "Dental Clinic",
-    description:
-      "Modern dental practice site with online booking and a calm, trustworthy aesthetic.",
-    url: "https://example.com",
-    category: "Healthcare",
-    imageUrl: "/images/project-dental.png",
-  },
-  {
-    title: "Fitness Studio",
-    description:
-      "High-energy landing page for a fitness studio with class schedules and membership CTAs.",
-    url: "https://example.com",
-    category: "Fitness",
-    imageUrl: "/images/project-fitness.png",
-  },
-  {
-    title: "Real Estate Agency",
-    description:
-      "Property showcase with rich listings and a refined, premium browsing experience.",
-    url: "https://example.com",
-    category: "Real Estate",
-    imageUrl: "/images/project-realestate.png",
-  },
-  {
-    title: "Restaurant",
-    description:
-      "Appetite-driven restaurant site with menu, reservations, and an immersive gallery.",
-    url: "https://example.com",
-    category: "Hospitality",
-    imageUrl: "/images/project-restaurant.png",
+    title: "FeelBG.com",
+    url: "https://feelbg.com",
+    category: { sr: "Web Platforma", en: "Web Platform" },
+    status: { sr: "U razvoju", en: "In development" },
+    tagline: {
+      sr: "Platforma za otkrivanje beogradskih lokala",
+      en: "A platform for discovering Belgrade's best spots",
+    },
+    description: {
+      sr: "Platforma namenjena turistima koji istražuju beogradske kafiće, restorane i klubove. Osmislio, dizajnirao i razvio sam je kompletno samostalno — od UI/UX dizajna, preko koda, do poslovnog modela zasnovanog na proviziji od partnerskih lokala.",
+      en: "A platform built for tourists exploring Belgrade's cafés, restaurants, and clubs. I conceived, designed, and developed it entirely on my own — from the UI/UX design through the code to a revenue model based on commission from partner venues.",
+    },
+    highlights: {
+      sr: [
+        "Interaktivna 3D mapa Beograda izrađena u Three.js",
+        "Video hero sekcija sa isprepletanim snimcima grada",
+        "HD foto-karusel i strukturiran prikaz informacija o lokalima",
+        "Poslovni model zasnovan na proviziji od partnerskih lokala",
+        "U planu: MapLibre GL JS mapa, referalne preporuke i chat widget",
+      ],
+      en: [
+        "Interactive 3D map of Belgrade built with Three.js",
+        "Video hero section with interwoven footage of the city",
+        "HD photo carousel and structured venue information",
+        "Revenue model based on commission from partner venues",
+        "Planned: MapLibre GL JS map, referrals, and a chat widget",
+      ],
+    },
+    tech: ["JavaScript", "Three.js", "HTML5", "CSS3", "Responsive Design"],
+
+    // TO ADD A SCREENSHOT (recommended): save one to
+    // client/public/images/project-feelbg.png and uncomment the line below.
+    // imageUrl: "/images/project-feelbg.png",
+
+    // Set to true to embed the live site instead — check first that feelbg.com
+    // renders inside an iframe (some hosts block it; see notes above).
+    livePreview: false,
   },
 ];
