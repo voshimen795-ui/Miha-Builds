@@ -39,11 +39,24 @@ function PreviewPanel({ project }: { project: Project }) {
   );
 }
 
+/** "Cvećara Trofej" -> "cvecara-trofej", so each card gets a stable own test id. */
+function slugify(title: string) {
+  return title
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "d")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 function ProjectShowcase({ project }: { project: Project }) {
   const [frameLoaded, setFrameLoaded] = useState(false);
   const { tr, t, lang } = useI18n();
   const hasImage = !!project.imageUrl;
   const useFrame = !hasImage && project.livePreview === true;
+  const slug = slugify(project.title);
 
   return (
     <motion.div
@@ -52,7 +65,7 @@ function ProjectShowcase({ project }: { project: Project }) {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="group"
-      data-testid="card-project-feelbg"
+      data-testid={`card-project-${slug}`}
     >
       <div className="rounded-2xl p-[1.5px] bg-gradient-to-br from-gold-400/50 via-gold-400/10 to-gold-400/30 transition-all duration-500 group-hover:from-gold-400/70">
         <div className="glass-strong rounded-2xl overflow-hidden">
@@ -76,7 +89,7 @@ function ProjectShowcase({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground transition-colors hover:text-gold-400"
-              data-testid="link-project-external"
+              data-testid={`link-project-external-${slug}`}
               aria-label={`Open ${project.title}`}
             >
               <ExternalLink size={14} />
@@ -115,7 +128,7 @@ function ProjectShowcase({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-navy-500/60 backdrop-blur-sm cursor-pointer z-10"
-              data-testid="link-project-visit"
+              data-testid={`link-project-visit-${slug}`}
             >
               <span className="px-7 py-3 rounded-md bg-gold-400 text-navy-500 font-semibold text-sm flex items-center gap-2 glow-gold-sm">
                 <ExternalLink size={16} />
@@ -130,7 +143,7 @@ function ProjectShowcase({ project }: { project: Project }) {
               <div>
                 <h3
                   className="text-2xl md:text-3xl font-serif font-bold text-offwhite mb-1.5"
-                  data-testid="text-project-title"
+                  data-testid={`text-project-title-${slug}`}
                 >
                   {project.title}
                 </h3>
@@ -148,7 +161,7 @@ function ProjectShowcase({ project }: { project: Project }) {
               </div>
             </div>
 
-            <p className="text-base text-offwhite/80 leading-relaxed mb-8" data-testid="text-project-desc">
+            <p className="text-base text-offwhite/80 leading-relaxed mb-8" data-testid={`text-project-desc-${slug}`}>
               {tr(project.description)}
             </p>
 

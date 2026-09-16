@@ -140,12 +140,12 @@ const translations = {
     orReachMe: { sr: "Ili me pronađi na", en: "Or reach me at" },
   },
   lab: {
-    badge: { sr: "Istaknut projekat", en: "Featured Project" },
+    badge: { sr: "Istaknuti projekti", en: "Featured Projects" },
     title: { sr: "Moj", en: "My" },
     titleAccent: { sr: "rad", en: "Work" },
     description: {
-      sr: "Projekat koji sam samostalno vodio od ideje do produkcije — od dizajna i koda do poslovnog modela.",
-      en: "A project I took from idea to production entirely on my own — from design and code to the business model.",
+      sr: "Projekti koje sam samostalno vodio od ideje do produkcije — od dizajna i koda do poslovnog modela.",
+      en: "Projects I took from idea to production entirely on my own — from design and code to the business model.",
     },
     visitSite: { sr: "Poseti sajt", en: "Visit Site" },
   },

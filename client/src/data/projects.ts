@@ -64,4 +64,100 @@ export const projects: Project[] = [
     // renders inside an iframe (some hosts block it; see notes above).
     livePreview: false,
   },
+  {
+    title: "Cvećara Trofej",
+    url: "https://cvecaratrofej.com",
+    category: { sr: "Sajt za biznis", en: "Business Website" },
+    status: { sr: "Uživo", en: "Live" },
+    tagline: {
+      sr: "Katalog cvetnih aranžmana i online poručivanje",
+      en: "Floral catalog with online ordering",
+    },
+    description: {
+      sr: "Sajt cvećare sa katalogom buketa i aranžmana i formom za poručivanje sa dostavom. Radio sam dizajn i razvoj — od strukture kataloga do toka poručivanja koji kupca vodi od izbora aranžmana do slanja porudžbine, bez komplikacija i bez naloga.",
+      en: "A florist's website with a catalog of bouquets and arrangements plus an order form with delivery details. I handled design and development — from the catalog structure to an ordering flow that takes the buyer from picking an arrangement to submitting the order, with no friction and no account required.",
+    },
+    highlights: {
+      sr: [
+        "Katalog aranžmana organizovan po kategorijama i povodima",
+        "Forma za poručivanje sa podacima za dostavu i porukom uz cveće",
+        "Galerija sa fotografijama u punoj rezoluciji",
+        "Mobile-first dizajn — većina porudžbina stiže sa telefona",
+        "Brzo učitavanje i lokalni SEO za pretragu „cvećara“",
+      ],
+      en: [
+        "Catalog of arrangements organized by category and occasion",
+        "Order form capturing delivery details and a gift message",
+        "Gallery with full-resolution photography",
+        "Mobile-first design — most orders arrive from a phone",
+        "Fast loading and local SEO for florist searches",
+      ],
+    },
+    tech: ["React", "TypeScript", "Tailwind CSS", "Responsive Design", "SEO"],
+    livePreview: false,
+  },
+  {
+    title: "GMGMT",
+    url: "https://gmgmt-ten.vercel.app",
+    category: { sr: "Sajt agencije", en: "Agency Website" },
+    status: { sr: "Uživo", en: "Live" },
+    tagline: {
+      sr: "Prezentacija menadžment agencije",
+      en: "Management agency presentation site",
+    },
+    description: {
+      sr: "Sajt menadžment agencije koji predstavlja usluge, način rada i tim, sa strukturom koja posetioca vodi ka kontaktu. Fokus je na čistom, modernom dizajnu, mekim animacijama i učitavanju koje ne troši strpljenje klijenta.",
+      en: "A management agency's website presenting its services, working process, and team, structured to lead visitors toward getting in touch. The focus is on a clean, modern design, smooth animation, and load times that don't spend the client's patience.",
+    },
+    highlights: {
+      sr: [
+        "Jasna sekcija usluga i objašnjen proces saradnje",
+        "Predstavljanje tima i referenci agencije",
+        "Animirani prelazi i mikro-interakcije kroz celu stranicu",
+        "Kontakt sekcija kao glavni cilj konverzije",
+        "Deploy na Vercel — svaki push objavljuje novu verziju",
+      ],
+      en: [
+        "Clear services section with the working process spelled out",
+        "Team and agency references presented up front",
+        "Animated transitions and micro-interactions throughout",
+        "Contact section as the primary conversion goal",
+        "Deployed on Vercel — every push ships a new version",
+      ],
+    },
+    tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
+    livePreview: false,
+  },
+  {
+    title: "Vukša",
+    url: "https://vuksasajt.vercel.app",
+    category: { sr: "Sajt za biznis", en: "Business Website" },
+    status: { sr: "Uživo", en: "Live" },
+    tagline: {
+      sr: "One-pager prezentacija malog biznisa",
+      en: "One-page presentation site for a small business",
+    },
+    description: {
+      sr: "Prezentacioni sajt malog biznisa sažet u jednu stranicu: usluge, cenovnik, galerija i kontakt. Cilj je bio da posetilac za manje od minuta vidi šta se nudi, koliko košta i kako da se javi — bez menija, bez lutanja kroz podstranice.",
+      en: "A small business presentation site condensed into a single page: services, pricing, gallery, and contact. The goal was for a visitor to see what's offered, what it costs, and how to get in touch in under a minute — no menus, no wandering through subpages.",
+    },
+    highlights: {
+      sr: [
+        "Sve na jednoj stranici — usluge, cene, galerija, kontakt",
+        "Pregledan cenovnik bez skrivenih stavki",
+        "Galerija radova kao glavni argument za poverenje",
+        "Kontakt forma i direktan poziv jednim klikom sa telefona",
+        "Lagan statički sajt, hostovan besplatno na Vercel-u",
+      ],
+      en: [
+        "Everything on one page — services, pricing, gallery, contact",
+        "Transparent pricing with no hidden items",
+        "Work gallery carrying the case for trust",
+        "Contact form plus one-tap calling from a phone",
+        "Lightweight static site, hosted free on Vercel",
+      ],
+    },
+    tech: ["React", "TypeScript", "Tailwind CSS", "Responsive Design", "Vercel"],
+    livePreview: false,
+  },
 ];
