@@ -22,6 +22,9 @@ export interface Project {
   status?: { sr: string; en: string };
   imageUrl?: string;
   livePreview?: boolean;
+  /** Show the project name in the browser chrome instead of the raw domain —
+   *  for sites still on a temporary host address. The link itself is unchanged. */
+  hideUrl?: boolean;
 }
 
 export const projects: Project[] = [
@@ -129,8 +132,12 @@ export const projects: Project[] = [
     livePreview: false,
   },
   {
-    title: "Vukša",
+    title: "Dermatina",
     url: "https://vuksasajt.vercel.app",
+    // The site still lives on a temporary Vercel address that has nothing to do
+    // with the brand, so the card shows the project name instead of the domain.
+    // Drop this line once it moves to its own domain.
+    hideUrl: true,
     category: { sr: "Sajt za biznis", en: "Business Website" },
     status: { sr: "Uživo", en: "Live" },
     tagline: {

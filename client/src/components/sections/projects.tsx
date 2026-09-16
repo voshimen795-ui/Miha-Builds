@@ -32,9 +32,11 @@ function PreviewPanel({ project }: { project: Project }) {
         <p className="font-serif text-3xl md:text-4xl text-offwhite mb-2">{project.title}</p>
         <p className="text-sm text-gold-400/90">{tr(project.tagline)}</p>
       </div>
-      <span className="text-xs text-muted-foreground font-mono">
-        {project.url.replace(/^https?:\/\//, "")}
-      </span>
+      {!project.hideUrl && (
+        <span className="text-xs text-muted-foreground font-mono">
+          {project.url.replace(/^https?:\/\//, "")}
+        </span>
+      )}
     </div>
   );
 }
@@ -80,7 +82,7 @@ function ProjectShowcase({ project }: { project: Project }) {
               <div className="bg-navy-700/60 rounded-md px-3 py-1 flex items-center gap-2 max-w-md mx-auto">
                 <Globe size={12} className="text-muted-foreground flex-shrink-0" />
                 <span className="text-xs text-muted-foreground truncate font-mono">
-                  {project.url.replace(/^https?:\/\//, "")}
+                  {project.hideUrl ? project.title : project.url.replace(/^https?:\/\//, "")}
                 </span>
               </div>
             </div>
