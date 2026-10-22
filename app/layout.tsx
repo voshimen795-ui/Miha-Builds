@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { LangProvider } from "@/lib/lang";
 import SmoothScroll from "@/components/smooth-scroll";
+import Cursor from "@/components/cursor";
+import NightReveal from "@/components/night-reveal";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 import "./sections.css";
@@ -41,6 +43,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LangProvider>
           <SmoothScroll />
+          <Cursor />
+          <NightReveal />
           {children}
         </LangProvider>
       </body>

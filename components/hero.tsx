@@ -216,7 +216,9 @@ export default function Hero() {
         <h1 ref={title} className="hero__title" key={lang}>
           <span className="line">{h.line1}</span>
           <span className="line">{h.line2}</span>
-          <span className="line line--accent">{h.line3}</span>
+          <span className="line line--accent">
+            {h.line3.split(" ").slice(0, -1).join(" ")} <em>{h.line3.split(" ").slice(-1)}</em>
+          </span>
         </h1>
       </div>
 

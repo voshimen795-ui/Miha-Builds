@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap, SplitText, prefersReducedMotion } from "@/lib/motion";
 import { useLang } from "@/lib/lang";
 import { useReveal } from "@/lib/use-reveal";
 import { EMAIL } from "@/lib/content";
@@ -22,6 +24,22 @@ export default function Contact() {
   const [state, setState] = useState<State>("idle");
   const [estimate, setEstimate] = useState("");
   useReveal(root, [lang]);
+
+  // The closing wordmark rises letter by letter as the page runs out.
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      const split = SplitText.create(".wordmark", { type: "chars", mask: "chars" });
+      gsap.from(split.chars, {
+        yPercent: 105,
+        stagger: 0.04,
+        ease: "quiet",
+        scrollTrigger: { trigger: ".wordmark", start: "top 95%", end: "bottom 85%", scrub: 0.8 },
+      });
+      return () => split.revert();
+    },
+    { scope: root },
+  );
 
   useEffect(() => {
     try {
@@ -134,6 +152,9 @@ export default function Contact() {
           </form>
         </div>
 
+        <div className="wordmark" aria-hidden="true">
+          Miha <em>Builds</em>
+        </div>
         <Footer />
       </div>
     </section>

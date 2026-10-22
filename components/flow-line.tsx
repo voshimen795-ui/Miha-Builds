@@ -3,6 +3,7 @@
 export default function FlowLine({ steps, vertical = false }: { steps: string[]; vertical?: boolean }) {
   return (
     <ol className={`flow ${vertical ? "flow--v" : ""}`}>
+      {!vertical && <span className="flow__packet" aria-hidden="true" />}
       {steps.map((s, i) => (
         <li key={s} style={{ ["--i" as string]: i }}>
           <i aria-hidden="true" />

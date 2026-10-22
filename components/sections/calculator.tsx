@@ -23,7 +23,7 @@ function Slider(props: {
 }) {
   const pct = ((props.value - props.min) / (props.max - props.min)) * 100;
   return (
-    <label className="slider">
+    <label className="slider" data-cursor="drag">
       <span className="slider__top">
         <span>{props.label}</span>
         <b className="mono">
