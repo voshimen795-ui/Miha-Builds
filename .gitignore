@@ -1,9 +1,10 @@
 node_modules
-dist
+.next
+out
 .DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
+*.tsbuildinfo
+next-env.d.ts
 .env
 .env.local
 *.local
+.vercel

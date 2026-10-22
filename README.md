@@ -1,95 +1,42 @@
 # Miha Builds
 
-Premium **portfolio & agency** one-pager for **Miha Builds** — a smooth,
-single-page site showcasing projects, services, skills, and a contact form.
+Site for **Miha Builds**, a business process automation studio (n8n + AI).
 Bilingual (Serbian / English), Serbian by default.
 
-Pure front-end React SPA — no backend, no database. Deploys free to Vercel,
-Netlify, Cloudflare Pages, or GitHub Pages.
+Visual direction: **"Tihi motor"** (quiet engine). A calm, editorial paper
+surface above, the running machine shown underneath. One signal colour.
 
-## Tech Stack
+## Stack
 
-- **React 18 + TypeScript** (via Vite)
-- **Tailwind CSS** + Radix UI (shadcn/ui components)
-- **Framer Motion** for animation
-- **react-icons** for tech logos
-- Custom context-based **i18n** (`client/src/lib/i18n.tsx`)
-- **Web3Forms** for the contact form (no backend needed)
+- **Next.js 15** (App Router) + **React 19** + TypeScript, deployed on Vercel
+- **GSAP** (ScrollTrigger, SplitText, CustomEase) for scroll and type motion
+- **Lenis** for weighted smooth scrolling
+- Fonts: Instrument Serif (headlines), Geist Sans and Geist Mono
+- Plain CSS with design tokens in `app/globals.css` (no UI kit)
 
-## Getting Started
+## Getting started
 
 ```bash
 npm install
-cp .env.example .env   # add your Web3Forms access key (see below)
-npm run dev            # http://localhost:5173
+npm run dev     # http://localhost:3000
+npm run build   # production build
 ```
 
-### Scripts
+## Where things live
 
-| Command           | Description                          |
-| ----------------- | ------------------------------------ |
-| `npm run dev`     | Start the Vite dev server.           |
-| `npm run build`   | Build the static site into `dist/`.  |
-| `npm run preview` | Preview the production build locally.|
-| `npm run check`   | Type-check with `tsc`.               |
+| Path | What |
+| --- | --- |
+| `lib/content.ts` | All copy, SR and EN side by side |
+| `app/globals.css` | Design tokens, grid, nav, buttons, hero |
+| `app/sections.css` | Sections 02-12 and case-study pages |
+| `components/hero.tsx` | 01 hero and the "untangling" machine |
+| `components/sections/` | 02 leak, 03 calculator, 04 systems, 05 process, 06 tools, 07 pricing, 08 trust, 09 about, 10 sites, 11 FAQ, 12 contact |
+| `app/sistemi/[slug]/` | One page per automation system |
+| `lib/motion.ts`, `lib/use-reveal.ts` | GSAP setup, easing curves, shared section reveal |
 
-## Contact Form Setup
+## Environment variables (Vercel)
 
-The contact form uses [Web3Forms](https://web3forms.com) — a free service that
-emails submissions to you with no backend.
-
-1. Go to web3forms.com and enter your email (`voshimen795@gmail.com`) to get a
-   free **Access Key**.
-2. Add it to `.env` as `VITE_WEB3FORMS_ACCESS_KEY=...`
-3. On Vercel, add the same value under **Settings → Environment Variables**.
-
-Until a key is set, the form shows a friendly error and points visitors to your
-email address as a fallback.
-
-## Editing Your Projects
-
-Projects live in **`client/src/data/projects.ts`** — a simple array you edit
-directly. Each entry takes a `title`, `url`, plus bilingual `category`,
-`tagline`, `description`, and `highlights`, and a `tech` list.
-
-**Preview images.** For the card preview you have three options, best first:
-
-1. **`imageUrl`** — a screenshot in `client/public/images/`. Always works;
-   recommended.
-2. **`livePreview: true`** — embeds the real site in an iframe. Only use this if
-   the site allows framing: many hosts send `X-Frame-Options` or a CSP
-   `frame-ancestors` header, which makes the embed render blank. Browsers give
-   JavaScript no way to detect that (`onLoad` fires even for error pages), so it
-   can't be auto-detected — verify manually before enabling.
-3. **Neither** — shows a clean branded panel with the project name, tagline, and
-   a "Visit Site" call to action.
-
-## Structure
-
-```
-client/
-  index.html
-  public/            Static assets (images, favicon, robots.txt)
-  src/
-    components/
-      sections/      hero, projects, services, skills, contact, footer
-      ui/            shadcn/ui components
-      navigation.tsx, floating-3d.tsx, scroll-progress.tsx
-    data/projects.ts Your portfolio content
-    lib/             i18n, motion variants, utils
-    pages/home.tsx   Assembles all sections into the one-pager
-    App.tsx, main.tsx
-```
-
-## Deploying to Vercel
-
-The included `vercel.json` sets the build command and output directory. Import
-the repo on Vercel, add the `VITE_WEB3FORMS_ACCESS_KEY` env var, and deploy —
-that's it.
-
-**Palette:** Deep Navy `#1A202C` · Champagne Gold `#D4AF37` · Off-White `#F7FAFC`
-Fonts: Inter (sans), Playfair Display (serif), JetBrains Mono (mono).
-
-## License
-
-MIT
+| Name | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact form delivery (free key at web3forms.com). Without it the form opens the visitor's mail app. |
+| `NEXT_PUBLIC_SITE_URL` | Final domain, e.g. `https://mihabuilds.rs`, for sitemap and share images. |
