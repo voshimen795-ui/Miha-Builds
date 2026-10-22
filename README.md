@@ -27,13 +27,16 @@ npm run build   # production build
 | Path | What |
 | --- | --- |
 | `lib/content.ts` | All copy, SR and EN side by side |
-| `app/globals.css` | Design tokens, grid, every component style |
+| `app/globals.css` | Design tokens, grid, nav, buttons, hero |
+| `app/sections.css` | Sections 02-12 and case-study pages |
 | `components/hero.tsx` | 01 hero and the "untangling" machine |
-| `lib/geometry.ts` | Wire geometry for the machine (chaos and calm states) |
-| `components/leak.tsx` | 02 opening of the dark "machine room" |
-| `lib/motion.ts` | GSAP setup and the shared easing curves |
+| `components/sections/` | 02 leak, 03 calculator, 04 systems, 05 process, 06 tools, 07 pricing, 08 trust, 09 about, 10 sites, 11 FAQ, 12 contact |
+| `app/sistemi/[slug]/` | One page per automation system |
+| `lib/motion.ts`, `lib/use-reveal.ts` | GSAP setup, easing curves, shared section reveal |
 
-## Status
+## Environment variables (Vercel)
 
-Prototype of sections 01 and 02. The remaining sections from the plan
-(calculator, case studies, process, pricing, FAQ, contact) come next.
+| Name | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact form delivery (free key at web3forms.com). Without it the form opens the visitor's mail app. |
+| `NEXT_PUBLIC_SITE_URL` | Final domain, e.g. `https://mihabuilds.rs`, for sitemap and share images. |

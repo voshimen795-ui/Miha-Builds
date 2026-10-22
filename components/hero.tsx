@@ -48,20 +48,33 @@ export default function Hero() {
   useGSAP(
     () => {
       const reduce = prefersReducedMotion();
-      let split: SplitText | null = null;
-      const run = () => {
-        if (!title.current) return;
-        split = SplitText.create(title.current.querySelectorAll(".line"), { type: "lines", mask: "lines", linesClass: "ln" });
-        const tl = gsap.timeline({ defaults: { ease: "quiet" } });
-        if (reduce) return;
-        tl.from(split.lines, { yPercent: 110, duration: 1.5, stagger: 0.09 }, 0.1)
-          .from(".hero__meta > *", { y: 14, autoAlpha: 0, duration: 1, stagger: 0.06 }, 0.35)
-          .from(".hero__lead, .hero__actions > *", { y: 18, autoAlpha: 0, duration: 1.1, stagger: 0.07 }, 0.6)
-          .from(".hero__stage", { autoAlpha: 0, duration: 1.6 }, 0.5)
-          .from(".hero__hud > *", { y: 10, autoAlpha: 0, duration: 1 }, 1);
+      // Fonts load asynchronously, so the intro runs in its own context that
+      // the cleanup can revert; otherwise a language switch mid-intro would
+      // leave elements stuck at their hidden "from" state.
+      let ctx: gsap.Context | null = null;
+      let cancelled = false;
+      document.fonts.ready.then(() => {
+        if (cancelled || !title.current) return;
+        ctx = gsap.context(() => {
+          const split = SplitText.create(title.current!.querySelectorAll(".line"), {
+            type: "lines",
+            mask: "lines",
+            linesClass: "ln",
+          });
+          if (reduce) return;
+          gsap
+            .timeline({ defaults: { ease: "quiet" } })
+            .from(split.lines, { yPercent: 110, duration: 1.5, stagger: 0.09 }, 0.1)
+            .from(".hero__meta > *", { y: 14, autoAlpha: 0, duration: 1, stagger: 0.06 }, 0.35)
+            .from(".hero__lead, .hero__actions > *", { y: 18, autoAlpha: 0, duration: 1.1, stagger: 0.07 }, 0.6)
+            .from(".hero__stage", { autoAlpha: 0, duration: 1.6 }, 0.5)
+            .from(".hero__hud > *", { y: 10, autoAlpha: 0, duration: 1 }, 1);
+        }, root);
+      });
+      return () => {
+        cancelled = true;
+        ctx?.revert();
       };
-      document.fonts.ready.then(run);
-      return () => split?.revert();
     },
     { scope: root, dependencies: [lang], revertOnUpdate: true },
   );
@@ -193,12 +206,11 @@ export default function Hero() {
       <div className="shell hero__top">
         <div className="hero__meta mono">
           <span className="hero__index">
-            <b>{h.index}</b>
+            <b>01</b>
           </span>
           <span>
             <b>{h.kicker}</b>
           </span>
-          <span>{h.meta}</span>
         </div>
 
         <h1 ref={title} className="hero__title" key={lang}>

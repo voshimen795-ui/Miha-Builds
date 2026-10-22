@@ -4,7 +4,9 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { LangProvider } from "@/lib/lang";
 import SmoothScroll from "@/components/smooth-scroll";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
+import "./sections.css";
 
 const serif = Instrument_Serif({
   subsets: ["latin", "latin-ext"],
@@ -15,9 +17,10 @@ const serif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Miha Builds · Automatizacija poslovnih procesa",
   description:
-    "Sistemi koji sami preuzimaju ponavljajući rad: unos računa, podsetnike, zakazivanja i izveštaje. n8n + AI, za firme koje žele nazad sate, novac i mir.",
+    "Računi, podsetnici, zakazivanja i izveštaji rade sami. n8n + AI automatizacija za firme koje žele nazad sate, novac i mir.",
   icons: { icon: "/favicon.png" },
   openGraph: {
     title: "Miha Builds · Automatizacija poslovnih procesa",

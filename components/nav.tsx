@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useLang } from "@/lib/lang";
 import BrandMark from "./brand-mark";
 import Button from "./button";
@@ -30,18 +31,20 @@ export default function Nav() {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  // On case-study pages the section anchors live on the home page.
+  const base = usePathname() === "/" ? "" : "/";
   const links = [
-    { href: "#systems", label: t.nav.systems, n: "04" },
-    { href: "#process", label: t.nav.process, n: "05" },
-    { href: "#pricing", label: t.nav.pricing, n: "07" },
-    { href: "#about", label: t.nav.about, n: "09" },
+    { href: `${base}#systems`, label: t.nav.systems, n: "04" },
+    { href: `${base}#process`, label: t.nav.process, n: "05" },
+    { href: `${base}#pricing`, label: t.nav.pricing, n: "07" },
+    { href: `${base}#about`, label: t.nav.about, n: "09" },
   ];
 
   return (
     <>
       <header className={`nav ${scrolled ? "nav--scrolled" : ""} ${hidden && !open ? "nav--hidden" : ""}`}>
         <div className="shell nav__inner">
-          <a href="#top" className="brand" aria-label="Miha Builds">
+          <a href={`${base}#top`} className="brand" aria-label="Miha Builds">
             <BrandMark />
             Miha Builds
           </a>
@@ -65,7 +68,7 @@ export default function Nav() {
                 EN
               </button>
             </div>
-            <Button href="#contact" size="sm" className="nav__cta">
+            <Button href={`${base}#contact`} size="sm" className="nav__cta">
               {t.nav.cta}
             </Button>
             <button
@@ -86,7 +89,7 @@ export default function Nav() {
           </a>
         ))}
         <div style={{ marginTop: 24 }}>
-          <Button href="#contact">{t.nav.cta}</Button>
+          <Button href={`${base}#contact`}>{t.nav.cta}</Button>
         </div>
       </div>
     </>

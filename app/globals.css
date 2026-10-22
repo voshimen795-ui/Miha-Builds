@@ -8,9 +8,9 @@
   --paper: #f3efe6;
   --paper-deep: #e9e3d6;
   --ink: #15140f;
-  --ink-soft: #3b3930;
-  --muted: #7d7869;
-  --rule: rgba(21, 20, 15, 0.11);
+  --ink-soft: #2b2922;
+  --muted: #5f5a4d;
+  --rule: rgba(21, 20, 15, 0.1);
   --rule-strong: rgba(21, 20, 15, 0.22);
   --signal: #e0491f;
   --signal-soft: rgba(224, 73, 31, 0.12);
@@ -52,8 +52,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
@@ -97,7 +97,7 @@ body::before {
 
 .mono {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -492,8 +492,8 @@ body::before {
 .hero__lead {
   grid-column: 4 / span 4;
   margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 19px;
+  line-height: 1.5;
   color: var(--ink-soft);
   max-width: 42ch;
 }
@@ -613,7 +613,7 @@ body::before {
 .m-chip text,
 .m-label {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   fill: var(--ink);
@@ -636,7 +636,7 @@ body::before {
 .m-note {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 17px;
+  font-size: 20px;
   fill: var(--ink-soft);
 }
 
@@ -687,56 +687,6 @@ body::before {
   }
 }
 
-/* ---------- 02: the machine room ---------- */
-
-.leak {
-  position: relative;
-  background: var(--night);
-  color: var(--night-ink);
-  padding: clamp(96px, 18vh, 200px) 0;
-  overflow: hidden;
-}
-
-.leak .grid-lines span {
-  border-color: var(--night-rule);
-  opacity: 1;
-}
-
-.leak__head {
-  position: relative;
-  display: flex;
-  gap: 18px;
-  align-items: center;
-  color: rgba(236, 231, 219, 0.55);
-  margin-bottom: clamp(36px, 7vh, 72px);
-}
-
-.leak__head b {
-  color: var(--signal);
-  font-weight: 400;
-}
-
-.leak__statement {
-  position: relative;
-  margin: 0;
-  max-width: 22ch;
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(38px, 5.6vw, 96px);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-}
-
-.leak__statement .word {
-  opacity: 0.16;
-}
-
-.leak__note {
-  position: relative;
-  margin-top: clamp(48px, 10vh, 110px);
-  color: rgba(236, 231, 219, 0.45);
-}
-
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -745,9 +695,6 @@ body::before {
   *::after {
     animation: none !important;
     transition-duration: 0.01ms !important;
-  }
-  .leak__statement .word {
-    opacity: 1;
   }
 }
 
