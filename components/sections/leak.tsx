@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { useLang } from "@/lib/lang";
 import { useReveal } from "@/lib/use-reveal";
@@ -16,7 +16,26 @@ export default function Leak() {
   const root = useRef<HTMLElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [auto, setAuto] = useState(true);
   const dep = L.departments[active];
+
+  // Departments cycle on their own while in view, until the visitor picks one.
+  useEffect(() => {
+    if (!auto || prefersReducedMotion()) return;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !timer) timer = setInterval(() => setActive((a) => (a + 1) % L.departments.length), 5200);
+      if (!e.isIntersecting && timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    });
+    if (panel.current) io.observe(panel.current);
+    return () => {
+      if (timer) clearInterval(timer);
+      io.disconnect();
+    };
+  }, [auto, L.departments.length]);
 
   useReveal(root, [lang]);
 
@@ -48,10 +67,15 @@ export default function Leak() {
                 role="tab"
                 aria-selected={i === active}
                 className="leak__tab"
-                onClick={() => setActive(i)}
+                data-cursor="pick"
+                onClick={() => {
+                  setAuto(false);
+                  setActive(i);
+                }}
               >
                 <span className="mono">0{i + 1}</span>
                 {d.name}
+                {i === active && auto && <span key={active} className="leak__timer" aria-hidden="true" />}
               </button>
             ))}
           </div>

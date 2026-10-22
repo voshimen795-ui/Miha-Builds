@@ -210,6 +210,20 @@ const sr = {
     line: "Automatizacija poslovnih procesa · Beograd",
     top: "Na vrh",
   },
+  live: {
+    label: "Uživo · demo",
+    events: [
+      "Račun #{n} proknjižen za {s} s",
+      "Podsetnik poslat klijentu {c}",
+      "Termin potvrđen za {t}",
+      "Duplikat označen, račun #{n}",
+      "Izveštaj spreman u 08:00",
+      "Novi upit, odgovor za {s} s",
+    ],
+    clients: ["Agencija Plus", "Studio Lepota", "Ordinacija Smile", "Firma Nova", "Kafe Centar"],
+  },
+  marquee: ["Manje ručnog rada", "Više vremena", "Manje grešaka", "Više mira"],
+  cursor: { open: "Otvori", drag: "Prevuci", visit: "Poseti", pick: "Izaberi" },
 };
 
 export type SystemCopy = {
@@ -426,6 +440,20 @@ const en: Copy = {
     line: "Business process automation · Belgrade",
     top: "Back to top",
   },
+  live: {
+    label: "Live · demo",
+    events: [
+      "Invoice #{n} booked in {s} s",
+      "Reminder sent to {c}",
+      "Appointment confirmed for {t}",
+      "Duplicate flagged, invoice #{n}",
+      "Report ready at 08:00",
+      "New enquiry, replied in {s} s",
+    ],
+    clients: ["Agency Plus", "Studio Lepota", "Smile Clinic", "Nova Ltd", "Cafe Centar"],
+  },
+  marquee: ["Less manual work", "More time", "Fewer mistakes", "More calm"],
+  cursor: { open: "Open", drag: "Drag", visit: "Visit", pick: "Pick" },
 };
 
 export const content: Record<Lang, Copy> = { sr, en };

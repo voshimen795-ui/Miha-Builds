@@ -24,7 +24,7 @@ export default function Sites() {
         <ul className="index">
           {S.items.map((s) => (
             <li key={s.name} className="rv">
-              <a href={s.url} target="_blank" rel="noopener noreferrer" className="index__row">
+              <a href={s.url} target="_blank" rel="noopener noreferrer" className="index__row" data-cursor="visit">
                 <span className="index__name">{s.name}</span>
                 <span className="index__desc">{s.d}</span>
                 <span className="index__url mono">{s.url.replace(/^https?:\/\//, "")}</span>

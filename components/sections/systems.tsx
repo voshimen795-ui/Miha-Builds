@@ -28,7 +28,18 @@ export default function Systems() {
           {SYSTEM_SLUGS.map((slug, i) => {
             const it = S.items[slug];
             return (
-              <Link key={slug} href={`/sistemi/${slug}`} className="card rv">
+              <Link
+                key={slug}
+                href={`/sistemi/${slug}`}
+                className="card rv"
+                data-cursor="open"
+                onPointerMove={(e) => {
+                  const r = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+                  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+                }}
+              >
+                <span className="card__spot" aria-hidden="true" />
                 <div className="card__top mono">
                   <span>0{i + 1}</span>
                   <span className="card__open">

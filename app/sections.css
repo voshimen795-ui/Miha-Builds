@@ -1460,3 +1460,343 @@
 .case .footer__top:hover {
   color: var(--ink);
 }
+
+/* ==================================================================
+   Life layer: ticker, marquee, cursor, card light, small pulses.
+   ================================================================== */
+
+/* ---------- Live ticker ---------- */
+
+.ticker {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.ticker__label {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+  padding: 0 22px 0 var(--gutter);
+  background: var(--ink);
+  color: var(--signal);
+  position: relative;
+  z-index: 1;
+  box-shadow: 24px 0 24px var(--ink);
+}
+
+.ticker__label i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: beat 1.6s ease-in-out infinite;
+}
+
+@keyframes beat {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224, 73, 31, 0.55); }
+  60% { box-shadow: 0 0 0 9px rgba(224, 73, 31, 0); }
+}
+
+.ticker__track {
+  display: flex;
+  gap: 44px;
+  white-space: nowrap;
+}
+
+.ticker__ev {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(243, 239, 230, 0.72);
+}
+
+.ticker__ev b {
+  font-size: 9px;
+  color: rgba(243, 239, 230, 0.35);
+}
+
+.ticker__ev--new {
+  color: var(--paper);
+  animation: ev-in 0.9s var(--ease-quiet);
+}
+
+.ticker__ev--new b {
+  color: var(--signal);
+}
+
+@keyframes ev-in {
+  from { opacity: 0; transform: translateX(-28px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 5vh, 56px) 0;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.marquee--dark {
+  background: var(--night);
+  color: var(--night-ink);
+  border-color: var(--night-rule);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee__w {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+  padding-right: clamp(24px, 3vw, 48px);
+  font-family: var(--serif);
+  font-size: clamp(52px, 8vw, 128px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.marquee__w--it {
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+}
+
+.marquee:not(.marquee--dark) .marquee__w--it {
+  -webkit-text-stroke-color: var(--ink);
+}
+
+.marquee__w i {
+  width: clamp(12px, 1.2vw, 18px);
+  height: clamp(12px, 1.2vw, 18px);
+  border-radius: 50%;
+  background: var(--signal);
+}
+
+/* ---------- Cursor ---------- */
+
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor label {
+  cursor: none;
+}
+
+html.has-cursor input[type="range"] {
+  cursor: none;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--signal);
+}
+
+.cursor-dot.is-hidden {
+  opacity: 0;
+}
+
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 1px solid rgba(120, 112, 96, 0.55);
+  display: grid;
+  place-items: center;
+  mix-blend-mode: normal;
+  transition: width 0.5s var(--ease-quiet), height 0.5s var(--ease-quiet), margin 0.5s var(--ease-quiet),
+    background 0.4s, border-color 0.4s, opacity 0.3s;
+}
+
+.cursor-ring span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cursor-ring.is-hot {
+  width: 58px;
+  height: 58px;
+  margin: -29px 0 0 -29px;
+  border-color: var(--signal);
+}
+
+.cursor-ring.is-label {
+  width: 88px;
+  height: 88px;
+  margin: -44px 0 0 -44px;
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+.cursor-ring.is-label span {
+  opacity: 1;
+}
+
+html:not(.has-cursor) .cursor-dot,
+html:not(.has-cursor) .cursor-ring {
+  display: none;
+}
+
+html.cursor-out .cursor-dot,
+html.cursor-out .cursor-ring {
+  opacity: 0;
+}
+
+/* ---------- Hero accent ---------- */
+
+.hero__title .line--accent em {
+  color: var(--signal);
+}
+
+/* ---------- Cards: light that follows the pointer + a packet in transit ---------- */
+
+.card {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.card__spot {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(224, 73, 31, 0.1), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.card:hover .card__spot {
+  opacity: 1;
+}
+
+.card__name {
+  transition: transform 0.7s var(--ease-quiet);
+}
+
+.card:hover .card__name {
+  transform: translateX(8px);
+}
+
+.flow__packet {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 4px var(--signal-soft);
+  animation: packet 4.2s var(--ease-lift) infinite;
+  z-index: 1;
+}
+
+.systems__grid .card:nth-child(2) .flow__packet { animation-delay: -1s; }
+.systems__grid .card:nth-child(3) .flow__packet { animation-delay: -2.1s; }
+.systems__grid .card:nth-child(4) .flow__packet { animation-delay: -3.2s; }
+
+@keyframes packet {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  80% { left: calc(80% + 1px); opacity: 1; }
+  100% { left: calc(80% + 1px); opacity: 0; }
+}
+
+@media (max-width: 560px) {
+  .flow__packet { display: none; }
+}
+
+/* ---------- Leak autoplay timer ---------- */
+
+.leak__tab {
+  position: relative;
+}
+
+.leak__timer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1.5px;
+  background: var(--signal);
+  transform-origin: left center;
+  animation: timer 5.2s linear forwards;
+}
+
+@keyframes timer {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ---------- Process: the reached nodes breathe ---------- */
+
+.step--on i {
+  animation: beat 2.2s ease-in-out infinite;
+}
+
+/* ---------- Tools hub breathes ---------- */
+
+.tools--live .orbit__hub {
+  animation: beat 2.6s ease-in-out infinite;
+}
+
+/* ---------- Giant wordmark ---------- */
+
+.wordmark {
+  margin-top: clamp(96px, 16vh, 180px);
+  font-family: var(--serif);
+  font-size: clamp(72px, 17.5vw, 300px);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  color: var(--night-ink);
+}
+
+.wordmark em {
+  color: var(--signal);
+}
+
+.contact .footer {
+  margin-top: 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__label i,
+  .flow__packet,
+  .leak__timer,
+  .step--on i,
+  .orbit__hub {
+    animation: none !important;
+  }
+}

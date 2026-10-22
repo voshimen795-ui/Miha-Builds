@@ -11,6 +11,8 @@ import About from "@/components/sections/about";
 import Sites from "@/components/sections/sites";
 import Faq from "@/components/sections/faq";
 import Contact from "@/components/sections/contact";
+import Ticker from "@/components/ticker";
+import Marquee from "@/components/marquee";
 
 export default function Home() {
   return (
@@ -18,8 +20,10 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Ticker />
         <Leak />
         <Calculator />
+        <Marquee />
         <Systems />
         <Process />
         <Tools />
@@ -28,6 +32,7 @@ export default function Home() {
         <About />
         <Sites />
         <Faq />
+        <Marquee dark />
         <Contact />
       </main>
     </>
